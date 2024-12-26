@@ -1,29 +1,35 @@
-export interface IVector2D {
-    x: number;
-    y: number;
-}
-
 export class Vector2D {
-    static add(v1: IVector2D, v2: IVector2D): Vector2D {
+    public x: number;
+    public y: number;
+    constructor(x?: number, y?: number) {
+        if (x === undefined) { x = 0; }
+        if (y === undefined) { y = 0; }
+        this.x = x;
+        this.y = y;
+    }
+    public toString() {
+        return `x: ${this.x}, y: ${this.y}`;
+    }
+    public static add(v1: Vector2D, v2: Vector2D): Vector2D {
         return { x: v1.x + v2.x, y: v1.y + v2.y }
     }
     
-    static subtract(v1: IVector2D, v2: IVector2D): Vector2D {
+    public static subtract(v1: Vector2D, v2: Vector2D): Vector2D {
         return { x: v1.x - v2.x, y: v1.y - v2.y }
     }
     
-    static scale(v: IVector2D, scalar: number): IVector2D {
+    public static scale(v: Vector2D, scalar: number): Vector2D {
         return { x: v.x * scalar, y: v.y * scalar }
     }
     
-    static dotProduct(v1: IVector2D, v2: IVector2D): number {
+    public static dotProduct(v1: Vector2D, v2: Vector2D): number {
         return v1.x * v2.x + v1.y * v2.y;
     }
     
-    static magnitude(v: IVector2D): number {
+    public static magnitude(v: Vector2D): number {
         return Math.sqrt(v.x * v.x + v.y * v.y);
     }
-    static normalize(v: IVector2D): IVector2D {
+    public static normalize(v: Vector2D): Vector2D {
         const mag = this.magnitude(v);
         return mag === 0 ? { x: 0, y: 0 } : this.scale(v, 1 / mag);
     }
